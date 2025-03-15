@@ -23,12 +23,3 @@ Each task directory contains its own Python scripts and notebooks. To run any sc
 cd task_directory
 python script_name.py
 ```
-
-## Author
-
-[Your Name]
-
-## Acknowledgements
-
-- UCSB Physics 129AL
-- Instructor: Zihang Wang 
