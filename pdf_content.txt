@@ -1,0 +1,181 @@
+
+--- Page 1 ---
+UCSB, Physics 129AL, Computational Physics:
+Section Worksheet, Week 6A
+Zihang Wang (UCSB), zihangwang@ucsb.edu
+February 11, 2025
+Section Participation and Submission Guidelines
+Section attendance is required , but you do not need to complete all the
+work during the section. At each section, the TA will answer any questions that
+you might have, and you are encouraged to work with others and look for online
+resources during the section and outside of sections. Unless otherwise stated,
+the work will be due one week from the time of assignment. The TA will give
+you 1 point for each task completed. You can see your grades on Canvas.
+We will use GitHub for section worksheet submissions. By the due date,
+you should have a single public repository on GitHub containing all the work
+you have done for the section work. Finally, upload a screenshot or a .txt file
+to Canvas with your GitHub username and repository name so the TA knows
+who you are and which repository you are using for the section.
+Remember: talk to your fellow students, work together, and use
+GPTs. You will find it much easier than working alone. Good luck!
+All work should be done in the Docker container, and don’t forget to
+commit it to Git!
+Task 1: Poisson
+Consider an example in astrophysics. Let’s assume stars randomly distributed
+around us with density n, what is probability that the nearest star is at distance
+R?
+Task 2: Lorentzian
+Resonance behavior is critical for understanding the energy dissipation and ab-
+sorption of a system. Let’s consider a general dissipative, driven harmonic
+oscillator in both time and frequency domain,
+d2x
+dt2+γdx
+dt+ω2
+0x=Feiωft,−ω2˜x+iγω˜x+ω2
+0˜x=Fδ(ω−ωf),(1)
+1
+--- Page 2 ---
+where ˜ xandxare related via Fourier transform. Show that the energy absorp-
+tion per cycle is a Lorentzian,
+E=Fπγωf
+(ω2
+0−ω2
+f)2+γ2ω2
+f. (2)
+Hint: sin(Σ) = −Aγω f.
+Task 2: Revisit the Heisenberg XXX Hamilto-
+nian on a Ring: Markov Chain
+In the previous section, we have looked at the Heisenberg XXX Hamiltonian
+spectrum on a ring using various matrix techniques. In this task, you are asked
+to construct the Markov chain that simulate
+Let us introduce the raising and lowering operators S±=Sx±iSy, such
+that
+S+| ↑⟩= 0, S−| ↑⟩=| ↓⟩, S z| ↑⟩=1
+2| ↑⟩
+S+| ↓⟩=| ↑⟩, S−| ↓⟩= 0, S z| ↓⟩=−1
+2| ↓⟩. (4)
+We can write the XXX Hamiltonian as the following,
+H=JN
+4−JNX
+i=11
+2(S+iS−i+1+S−iS+i+1) +SziSzi+1, (5)
+with periodic boundary condition, such that N+ 1 = 1.
+Let us look at the different terms. The terms involving S±are called hopping
+terms since they move a spin up or spin down to a neighboring site. The constant
+term proportional to Nis added for convenience. It is simply an overall shift
+of the energy levels. Depending on the sign, you want to align or anti-align the
+spins, i.e. (anti-)ferromagnetism.
+The above Hamiltonian can be written in a matrix form with a given Hilbert
+space. let’s consider a simple 3-spin chain, where the index location represents
+the sites, i.e. 1 ,2,3. The Hamiltonian for the Heisenberg XXX model with
+N= 3 spins is given by,
+H=3J
+4−J"
+1
+2(S+1S−2+S−1S+2)+Sz1Sz2+1
+2(S+2S−3+S−2S+3)+Sz2Sz3+1
+2(S+3S−1+S−3S+1)+Sz3Sz1#
+with states,
+(|↑↑↑⟩,|↑↑↓⟩,|↑↓↑⟩,|↑↓↓⟩,|↓↑↑⟩,|↓↑↓⟩,|↓↓↑⟩,|↓↓↓⟩ ).
+The corresponding marginal distribution is given by,
+π= (π1, π2,···, π8). (3)
+2
+--- Page 3 ---
+For example, matrix element can be calculate via the following expression,
+⟨↓↑↓| S+2S−3|↓↓↑⟩ = 1. (4)
+Question 1: Markov chain in site basis
+Using the above Hamiltonian, construct the Markov chain for the above N= 3
+system. What are the transition probabilities? Write it in a matrix form.
+Question 2: Markov chain in site basis
+At a given temperature, find a stationary distribution πby solving the following
+expression,
+πP=π,andkX
+i=1πi= 1.
+Question 3: Markov chain in site basis
+Use the power iteration,
+πk+1=πkP
+, to find the stationary distribution for the following three initial guesses,
+•1) Pr(|↑↑↑⟩ ) = 1 ,
+•2) Pr(|↑↑↑⟩ ) =1
+2,Pr(|↓↑↓⟩ ) =1
+2,
+•3) a uniformly distributed initial configuration.
+Question 4: Markov chain in magnon basis
+Let’s say we are only interested in the population probabilities (diagonal term
+in the density matrix) of magnons, where we can model the transition between
+magnons |k⟩ → | k′⟩classically via the classical master equation . We should
+note that if the off-diagonal terms are large (represents the coherence than
+number statistics), we must use the quantum master equation (Lindblad master
+equation).
+Recall the magnon formulation: Ground state. Since the total spin is
+conserved, the state in which all spins are aligned in the same direction must
+be an eigenstate of the Hamiltonian. This corresponds to the ferromagnetic
+vacuum. Therefore, we define the vacuum state as
+|0⟩=| ↑↑. . .↑⟩.
+It is straightforward to calculate the energy of this state:
+H|0⟩= 0.
+Themagnon (spin wave) state is defined as:
+3
+--- Page 4 ---
+|p⟩=X
+neipnS−n|0⟩
+where iis the imaginary unit, S−nis the spin lowering operator at site n,
+and|0⟩is the ground state. The periodic boundary condition ensures that,
+eipN= 1. This ensures that the momentum are quantized,
+eipn=eip(n+N)
+which implies that the momentum pis quantized in units of2π
+N. Thus, the
+allowed values for pare:
+p=2πk
+N, k = 0,1,2, . . . , N −1
+The energy corresponding to each allowed value of pis given by the dispersion
+relation:
+E(p) = 2 Jsin2p
+2
+Substituting the quantized values of p, we get the energy levels for the
+magnon as:
+Ek= 2Jsin2πk
+N
+, k = 0,1,2, . . . , N −1
+ForN= 3 case, in the basis of magnon, write the Markov chain associated
+with transitions between magnons. You can assume Boltzmann type transition
+between magnons, where the elements of Phave the form:
+Pij∼e−(Ek−Ek′)/kBT.
+Remember, in the ring configuration, the energy is at maximum at k=N/2
+because this is the case where exactly half of the spins are flip. What are the
+difference between transition matrices in site basis and in magnon basis?
+Question 5: Markov chain in magnon basis
+Again, at a given temperature, find a stationary distribution πby solving the
+following expression,
+πP=π,andkX
+i=1πi= 1.
+How does the stationary distribution of magnon changes as you increase the
+temperature? What are the similarities and difference from the site basis above?
+Remember, you are in the magnon basis.
+4
+--- Page 5 ---
+Question 6: Markov chain in magnon basis
+Use the power iteration,
+πk+1=πkP
+, to find the stationary distribution for the following three initial guesses,
+•1) Pr(|k= 1⟩) = 1 ,
+•2) Pr(|k= 1⟩) =1
+2,Pr(|k= 4⟩) =1
+2,
+•3) a uniformly distributed initial magnon configuration.
+Question 7: Master equation evolution
+The classical master equation in continuous time takes the general form,
+dπi
+dt=X
+j(Qjiπj−Qjiπi).
+Convert the previous transition matrix Pinto the transition rate matrix Q
+numerically. Be careful on the “time” definition when you use Pn. Hint: try to
+fixn, and find the relation with respect to t∼n∆t,
+Q∼1
+n∆tln(Pn). (5)
+Write the linear equation in the following matrix representation,
+dπ
+dt=πQ, (6)
+and with the initial condition Pr( |k= 1⟩) = 1, solve the above system numeri-
+cally with any scipy integrator, and visualize the probability πi.
+5
